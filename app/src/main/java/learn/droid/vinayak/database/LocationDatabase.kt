@@ -18,7 +18,7 @@ abstract class LocationDatabase : RoomDatabase() {
             if(databaseInstance == null) {
                 databaseInstance = Room.databaseBuilder(context.applicationContext,
                                                         LocationDatabase::class.java,
-                                                        "location").build()
+                                                        "vinayak").build()
             }
             return databaseInstance!!
         }
