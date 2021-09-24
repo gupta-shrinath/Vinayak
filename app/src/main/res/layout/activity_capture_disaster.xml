@@ -12,12 +12,51 @@
     <ImageView
         android:id="@+id/disaster_preview_iv"
         android:layout_width="419dp"
-        android:layout_height="500dp"
+        android:layout_height="400dp"
+        android:layout_marginBottom="332dp"
         android:background="@color/black"
-        android:layout_marginBottom="232dp"
         android:contentDescription="@string/preview_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <EditText
+        android:id="@+id/etDisaster"
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:hint="@string/disaster"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:maxLines="1"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/disaster_preview_iv" />
+
+    <EditText
+        android:id="@+id/etLocation"
+        android:layout_width="314dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="@string/location"
+        android:inputType="text"
+        android:maxLines="1"
+        android:minHeight="48dp"
+        android:importantForAutofill="no"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDisaster" />
+
+    <Button
+        android:id="@+id/btSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etLocation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

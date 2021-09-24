@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +26,9 @@ import java.lang.Exception
 class CaptureDisasterActivity : AppCompatActivity() {
 
     private lateinit var layout:ConstraintLayout
+    private lateinit var etLocation: EditText
+    private lateinit var etDisaster:EditText
+    private lateinit var btSubmit:Button
 
     private val locationBroadcastReceiver = LocationBroadcastReceiver()
 
@@ -43,8 +49,14 @@ class CaptureDisasterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_capture_disaster)
-        val disasterImageView = findViewById<ImageView>(R.id.disaster_preview_iv)
         layout = findViewById(R.id.captureDisaster_cl)
+        val disasterImageView = findViewById<ImageView>(R.id.disaster_preview_iv)
+        etLocation = findViewById(R.id.etLocation)
+        etDisaster = findViewById(R.id.etDisaster)
+        btSubmit = findViewById(R.id.btSubmit)
+        btSubmit.setOnClickListener {
+
+        }
         launchCamera(disasterImageView)
     }
 
@@ -55,6 +67,7 @@ class CaptureDisasterActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        locationBroadcastReceiver.setLocationEditText(etLocation)
         val intentFilter = IntentFilter("learn.droid.vinayak.location")
         LocalBroadcastManager.getInstance(this).registerReceiver(locationBroadcastReceiver,intentFilter)
     }

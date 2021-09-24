@@ -2,4 +2,7 @@
     <string name="app_name">Vinayak</string>
     <string name="report">Report</string>
     <string name="preview_image">Preview Image of Disaster</string>
+    <string name="location">Location</string>
+    <string name="disaster">Disaster</string>
+    <string name="submit">Submit</string>
 </resources>
