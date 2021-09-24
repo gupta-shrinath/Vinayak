@@ -1,4 +1,4 @@
-package learn.droid.vinayak
+package learn.droid.vinayak.activities
 
 import android.Manifest
 import android.app.Activity
@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.snackbar.Snackbar
+import learn.droid.vinayak.R
 import learn.droid.vinayak.receivers.LocationBroadcastReceiver
 import learn.droid.vinayak.services.LocationService
 import java.lang.Exception
