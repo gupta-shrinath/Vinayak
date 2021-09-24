@@ -9,21 +9,28 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import learn.droid.vinayak.R
+import learn.droid.vinayak.database.LocationDatabase
+import learn.droid.vinayak.database.entities.Location
 import learn.droid.vinayak.receivers.LocationBroadcastReceiver
 import learn.droid.vinayak.services.LocationService
 import java.lang.Exception
+import kotlin.coroutines.CoroutineContext
 
-class CaptureDisasterActivity : AppCompatActivity() {
+class CaptureDisasterActivity : AppCompatActivity(),CoroutineScope {
 
     private lateinit var layout:ConstraintLayout
     private lateinit var etLocation: EditText
@@ -46,6 +53,11 @@ class CaptureDisasterActivity : AppCompatActivity() {
         }
     }
 
+    private var job: Job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_capture_disaster)
@@ -55,7 +67,19 @@ class CaptureDisasterActivity : AppCompatActivity() {
         etDisaster = findViewById(R.id.etDisaster)
         btSubmit = findViewById(R.id.btSubmit)
         btSubmit.setOnClickListener {
-
+            val locationDao = LocationDatabase.getInstance(this).locationDao()
+            val disaster = etDisaster.text.toString()
+            val address =  etLocation.text.toString()
+            val location = Location(disaster = disaster,address = address)
+            launch{
+                val result:Long = locationDao.insertLocation(location)
+                if(!Boolean.equals(result.compareTo(-1))){
+                    Toast.makeText(applicationContext,"Disaster Reported",Toast.LENGTH_LONG).show()
+                }else {
+                    Toast.makeText(applicationContext,"Disaster Report Failed",Toast.LENGTH_LONG).show()
+                }
+                finish()
+            }
         }
         launchCamera(disasterImageView)
     }
