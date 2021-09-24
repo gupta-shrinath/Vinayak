@@ -11,6 +11,6 @@ interface LocationDao {
     suspend fun getLocations(): List<Location>
 
     @Insert()
-    suspend fun insertLocation(location:Location)
+    suspend fun insertLocation(location:Location):Long
 
 }
