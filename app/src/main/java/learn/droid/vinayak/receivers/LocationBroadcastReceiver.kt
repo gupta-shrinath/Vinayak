@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.widget.EditText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -14,6 +15,8 @@ import learn.droid.vinayak.utils.ReverseGeoCoder
 import kotlin.coroutines.CoroutineContext
 
 class LocationBroadcastReceiver() : BroadcastReceiver(), CoroutineScope {
+
+    private lateinit var etLocation:EditText
     private var job: Job = Job()
 
     override val coroutineContext: CoroutineContext
@@ -23,6 +26,9 @@ class LocationBroadcastReceiver() : BroadcastReceiver(), CoroutineScope {
         private val TAG = LocationBroadcastReceiver::class.simpleName
     }
 
+     fun setLocationEditText(editText: EditText) {
+        etLocation = editText
+    }
     override fun onReceive(p0: Context?, p1: Intent?) {
         var longitude = 0.0
         var latitude = 0.0
@@ -36,7 +42,9 @@ class LocationBroadcastReceiver() : BroadcastReceiver(), CoroutineScope {
                 latitude = it.toDouble()
             }
         }
-        Log.d(TAG, "onReceive: "+ p0?.let { ReverseGeoCoder.getLocation(it,longitude,latitude) })
+        val address = p0?.let { ReverseGeoCoder.getLocation(it,longitude,latitude) }
+        Log.d(TAG, "onReceive: $address")
+        etLocation.setText(address)
         val locationDao = p0?.let { LocationDatabase.getInstance(it).locationDao()}
         val location = Location(longitude = longitude,latitude = latitude)
         launch{
