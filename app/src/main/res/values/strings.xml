@@ -5,4 +5,6 @@
     <string name="location">Location</string>
     <string name="disaster">Disaster</string>
     <string name="submit">Submit</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="view">View</string>
 </resources>

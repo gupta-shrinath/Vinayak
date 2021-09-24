@@ -11,9 +11,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val reportButton = findViewById<Button>(R.id.report_btn)
+        val reportButton = findViewById<Button>(R.id.btnreport)
         reportButton.setOnClickListener {
             startActivity(Intent(this, CaptureDisasterActivity::class.java))
+        }
+
+        val viewButton = findViewById<Button>(R.id.btnView)
+        viewButton.setOnClickListener {
+            startActivity(Intent(this,MapsActivity::class.java))
         }
 
     }
